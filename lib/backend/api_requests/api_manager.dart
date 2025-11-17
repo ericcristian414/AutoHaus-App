@@ -12,7 +12,7 @@ import 'package:equatable/equatable.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime_type/mime_type.dart';
 
-import '/flutter_flow/uploaded_file.dart';
+import '../../flutter/uploaded_file.dart';
 
 import 'get_streamed_response.dart';
 
@@ -120,11 +120,8 @@ class ApiCallResponse {
   final http.Response? response;
   final http.StreamedResponse? streamedResponse;
   final Object? exception;
-  // Whether we received a 2xx status (which generally marks success).
   bool get succeeded => statusCode >= 200 && statusCode < 300;
   String getHeader(String headerName) => headers[headerName] ?? '';
-  // Return the raw body from the response, or if this came from a cloud call
-  // and the body is not a string, then the json encoded body.
   String get bodyText =>
       response?.body ??
       (jsonBody is String ? jsonBody as String : jsonEncode(jsonBody));
@@ -161,18 +158,11 @@ class ApiCallResponse {
 class ApiManager {
   ApiManager._();
 
-  // Cache that will ensure identical calls are not repeatedly made.
   static Map<ApiCallOptions, ApiCallResponse> _apiCache = {};
 
   static ApiManager? _instance;
   static ApiManager get instance => _instance ??= ApiManager._();
-
-  // If your API calls need authentication, populate this field once
-  // the user has authenticated. Alter this as needed.
   static String? _accessToken;
-  // You may want to call this if, for example, you make a change to the
-  // database and no longer want the cached result of a call that may
-  // have changed.
   static void clearCache(String callName) => _apiCache.keys
       .toSet()
       .forEach((k) => k.callName == callName ? _apiCache.remove(k) : null);
@@ -289,9 +279,9 @@ class ApiManager {
     );
 
     bool isFile(dynamic e) =>
-        e is FFUploadedFile ||
-        e is List<FFUploadedFile> ||
-        (e is List && e.firstOrNull is FFUploadedFile);
+        e is FlutterUploadedFile ||
+        e is List<FlutterUploadedFile> ||
+        (e is List && e.firstOrNull is FlutterUploadedFile);
 
     final nonFileParams = toStringMap(
         Map.fromEntries(params.entries.where((e) => !isFile(e.value))));
@@ -300,8 +290,8 @@ class ApiManager {
     params.entries.where((e) => isFile(e.value)).forEach((e) {
       final param = e.value;
       final uploadedFiles = param is List
-          ? param as List<FFUploadedFile>
-          : [param as FFUploadedFile];
+          ? param as List<FlutterUploadedFile>
+          : [param as FlutterUploadedFile];
       for (var uploadedFile in uploadedFiles) {
         files.add(
           http.MultipartFile.fromBytes(
@@ -431,7 +421,6 @@ class ApiManager {
           cache: cache,
           isStreamingApi: isStreamingApi,
         );
-    // Modify for your specific needs if this differs from your API.
     if (_accessToken != null) {
       headers[HttpHeaders.authorizationHeader] = 'Bearer $_accessToken';
     }
@@ -439,8 +428,7 @@ class ApiManager {
       apiUrl = 'https://$apiUrl';
     }
 
-    // If we've already made this exact call before and caching is on,
-    // return the cached result.
+
     if (cache && _apiCache.containsKey(callOptions)) {
       return _apiCache[callOptions]!;
     }
@@ -507,7 +495,6 @@ class ApiManager {
           break;
       }
 
-      // If caching is on, cache the result (if present).
       if (cache) {
         _apiCache[callOptions] = result;
       }

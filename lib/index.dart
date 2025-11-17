@@ -1,4 +1,3 @@
-// Export pages
 export '/pages/home_page/home_page_widget.dart' show HomePageWidget;
 export '/toldo/toldo_widget.dart' show ToldoWidget;
 export '/cronojan/cronojan_widget.dart' show CronojanWidget;

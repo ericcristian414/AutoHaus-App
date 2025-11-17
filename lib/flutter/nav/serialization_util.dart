@@ -5,9 +5,9 @@ import 'package:from_css_color/from_css_color.dart';
 
 import '/backend/schema/structs/index.dart';
 
-import '../../flutter_flow/lat_lng.dart';
-import '../../flutter_flow/place.dart';
-import '../../flutter_flow/uploaded_file.dart';
+import '../lat_lng.dart';
+import '../place.dart';
+import '../uploaded_file.dart';
 
 /// SERIALIZATION HELPERS
 
@@ -17,7 +17,7 @@ String dateTimeRangeToString(DateTimeRange dateTimeRange) {
   return '$startStr|$endStr';
 }
 
-String placeToString(FFPlace place) => jsonEncode({
+String placeToString(FlutterPlace place) => jsonEncode({
       'latLng': place.latLng.serialize(),
       'name': place.name,
       'address': place.address,
@@ -27,7 +27,7 @@ String placeToString(FFPlace place) => jsonEncode({
       'zipCode': place.zipCode,
     });
 
-String uploadedFileToString(FFUploadedFile uploadedFile) =>
+String uploadedFileToString(FlutterUploadedFile uploadedFile) =>
     uploadedFile.serialize();
 
 String? serializeParam(
@@ -65,10 +65,10 @@ String? serializeParam(
         data = (param as LatLng).serialize();
       case ParamType.Color:
         data = (param as Color).toCssString();
-      case ParamType.FFPlace:
-        data = placeToString(param as FFPlace);
-      case ParamType.FFUploadedFile:
-        data = uploadedFileToString(param as FFUploadedFile);
+      case ParamType.FlutterPlace:
+        data = placeToString(param as FlutterPlace);
+      case ParamType.FlutterUploadedFile:
+        data = uploadedFileToString(param as FlutterUploadedFile);
       case ParamType.JSON:
         data = json.encode(param);
 
@@ -109,7 +109,7 @@ LatLng? latLngFromString(String? latLngStr) {
   );
 }
 
-FFPlace placeFromString(String placeStr) {
+FlutterPlace placeFromString(String placeStr) {
   final serializedData = jsonDecode(placeStr) as Map<String, dynamic>;
   final data = {
     'latLng': serializedData.containsKey('latLng')
@@ -122,7 +122,7 @@ FFPlace placeFromString(String placeStr) {
     'country': serializedData['country'] ?? '',
     'zipCode': serializedData['zipCode'] ?? '',
   };
-  return FFPlace(
+  return FlutterPlace(
     latLng: data['latLng'] as LatLng,
     name: data['name'] as String,
     address: data['address'] as String,
@@ -133,8 +133,8 @@ FFPlace placeFromString(String placeStr) {
   );
 }
 
-FFUploadedFile uploadedFileFromString(String uploadedFileStr) =>
-    FFUploadedFile.deserialize(uploadedFileStr);
+FlutterUploadedFile uploadedFileFromString(String uploadedFileStr) =>
+    FlutterUploadedFile.deserialize(uploadedFileStr);
 
 enum ParamType {
   int,
@@ -145,8 +145,8 @@ enum ParamType {
   DateTimeRange,
   LatLng,
   Color,
-  FFPlace,
-  FFUploadedFile,
+  FlutterPlace,
+  FlutterUploadedFile,
   JSON,
 
   DataStruct,
@@ -200,9 +200,9 @@ dynamic deserializeParam<T>(
         return latLngFromString(param);
       case ParamType.Color:
         return fromCssColor(param);
-      case ParamType.FFPlace:
+      case ParamType.FlutterPlace:
         return placeFromString(param);
-      case ParamType.FFUploadedFile:
+      case ParamType.FlutterUploadedFile:
         return uploadedFileFromString(param);
       case ParamType.JSON:
         return json.decode(param);

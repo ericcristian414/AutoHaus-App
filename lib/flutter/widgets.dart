@@ -2,8 +2,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-class FFButtonOptions {
-  const FFButtonOptions({
+class FlutterButtonOptions {
+  const FlutterButtonOptions({
     this.textAlign,
     this.textStyle,
     this.elevation,
@@ -50,8 +50,8 @@ class FFButtonOptions {
   final double? hoverElevation;
 }
 
-class FFButtonWidget extends StatefulWidget {
-  const FFButtonWidget({
+class FlutterButtonWidget extends StatefulWidget {
+  const FlutterButtonWidget({
     super.key,
     required this.text,
     required this.onPressed,
@@ -65,14 +65,14 @@ class FFButtonWidget extends StatefulWidget {
   final Widget? icon;
   final IconData? iconData;
   final Function()? onPressed;
-  final FFButtonOptions options;
+  final FlutterButtonOptions options;
   final bool showLoadingIndicator;
 
   @override
-  State<FFButtonWidget> createState() => _FFButtonWidgetState();
+  State<FlutterButtonWidget> createState() => _FlutterButtonWidgetState();
 }
 
-class _FFButtonWidgetState extends State<FFButtonWidget> {
+class _FlutterButtonWidgetState extends State<FlutterButtonWidget> {
   bool loading = false;
 
   int get maxLines => widget.options.maxLines ?? 1;
@@ -271,14 +271,10 @@ extension _WithoutColorExtension on TextStyle {
         debugLabel: debugLabel,
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
-        // The _package field is private so unfortunately we can't set it here,
-        // but it's almost always unset anyway.
-        // package: _package,
         overflow: overflow,
       );
 }
 
-// Slightly hacky method of getting the layout width of the provided text.
 double? _getTextWidth(String? text, TextStyle? style, int maxLines) =>
     text != null
         ? (TextPainter(

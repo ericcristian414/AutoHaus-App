@@ -1,10 +1,10 @@
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import '../flutter/theme.dart';
+import '../flutter/util.dart';
+import '../flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_haus/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:auto_haus/Dispositivos/dispositivos_provider.dart'; // Importe o provider
+import 'package:auto_haus/Dispositivos/dispositivos_provider.dart'; 
 import 'objetos_model.dart';
 export 'objetos_model.dart';
 
@@ -22,7 +22,6 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
   late ObjetosModel _model;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // Lista filtrada que será exibida
   List<Map<String, dynamic>> filteredDevices = [];
 
   @override
@@ -33,18 +32,14 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
     _model.searchBarTextController ??= TextEditingController();
     _model.searchBarFocusNode ??= FocusNode();
 
-    // Inicializa a lista de dispositivos quando o widget é criado
     _initializeDevicesList();
 
-    // Adiciona listener para o campo de pesquisa
     _model.searchBarTextController?.addListener(_filterDevices);
   }
 
-  // Função para inicializar a lista de dispositivos com os textos localizados
   void _initializeDevicesList() {
     final localizations = AppLocalizations.of(context)!;
     
-    // Cria a lista de dispositivos usando as strings localizadas
     final allDevices = [
       {
         'name': 'lampada',
@@ -101,13 +96,11 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
   }
 
   void _filterDevices() {
-    // Protege contra valores nulos usando o operador '!' para garantir não-nulidade
     final query = _model.searchBarTextController!.text.toLowerCase();
     final localizations = AppLocalizations.of(context)!;
 
     setState(() {
       if (query.contains('qual o melhor projeto')) {
-        // Easter egg ativado!
         filteredDevices = [
           {
             'name': 'Obviamente o Toldo',
@@ -156,8 +149,6 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
           },
         ];
       } else {
-        // Recarrega a lista completa de dispositivos com strings localizadas
-        // para garantir que mesmo após mudança de idioma, a filtragem funcione corretamente
         final allDevices = [
           {
             'name': 'lampada',
@@ -219,8 +210,6 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Reinicializa a lista de dispositivos quando há mudança nas dependências
-    // (o que inclui mudanças no Locale/idioma)
     _initializeDevicesList();
   }
 
@@ -246,7 +235,6 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
           top: true,
           child: Stack(
             children: [
-              // Botão visível para ir para a homepage
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(10.0, 8.0, 0, 0),
                 child: SizedBox(
@@ -258,9 +246,9 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
                       backgroundColor: Colors.transparent,
                     ),
                     onPressed: () {
-                      context.go('/homepage'); // ou Navigator.pushNamed(context, '/homepage')
+                      context.go('/homepage'); 
                     },
-                    child: const SizedBox.shrink(), // invisível
+                    child: const SizedBox.shrink(), 
                   ),
                 ),
               ),
@@ -275,7 +263,7 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
                       child: Text(
                         AppLocalizations.of(context)!.dispositivos,
                         textAlign: TextAlign.start,
-                        style: FlutterFlowTheme.of(context)
+                        style: FlutterTheme.of(context)
                             .headlineMedium
                             .override(
                               fontFamily: 'Inter Tight',
@@ -309,13 +297,13 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
                                   decoration: InputDecoration(
                                     labelText:
                                         AppLocalizations.of(context)!.procure,
-                                    labelStyle: FlutterFlowTheme.of(context)
+                                    labelStyle: FlutterTheme.of(context)
                                         .labelMedium
                                         .override(
                                           fontFamily: 'Inter',
                                           letterSpacing: 0.0,
                                         ),
-                                    hintStyle: FlutterFlowTheme.of(context)
+                                    hintStyle: FlutterTheme.of(context)
                                         .labelMedium
                                         .override(
                                           fontFamily: 'Inter',
@@ -330,7 +318,7 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
+                                        color: FlutterTheme.of(context)
                                             .primary,
                                         width: 2.0,
                                       ),
@@ -339,7 +327,7 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
                                     errorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color:
-                                            FlutterFlowTheme.of(context).error,
+                                            FlutterTheme.of(context).error,
                                         width: 2.0,
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),
@@ -347,25 +335,25 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color:
-                                            FlutterFlowTheme.of(context).error,
+                                            FlutterTheme.of(context).error,
                                         width: 2.0,
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     filled: true,
-                                    fillColor: FlutterFlowTheme.of(context)
+                                    fillColor: FlutterTheme.of(context)
                                         .primaryBackground,
                                     contentPadding:
                                         const EdgeInsetsDirectional.fromSTEB(
                                             24.0, 24.0, 24.0, 24.0),
                                     prefixIcon: Icon(
                                       Icons.search,
-                                      color: FlutterFlowTheme.of(context)
+                                      color: FlutterTheme.of(context)
                                           .secondaryText,
                                       size: 16.0,
                                     ),
                                   ),
-                                  style: FlutterFlowTheme.of(context)
+                                  style: FlutterTheme.of(context)
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Inter',
@@ -385,10 +373,10 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     339.0, 29.0, 0.0, 0.0),
-                                child: FFButtonWidget(
+                                child: FlutterButtonWidget(
                                   onPressed: null,
                                   text: 'Button',
-                                  options: FFButtonOptions(
+                                  options: FlutterButtonOptions(
                                     width: 60.0,
                                     height: 60.0,
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -412,7 +400,7 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
                                 355.0, 43.0, 0.0, 0.0),
                             child: Icon(
                               Icons.search_sharp,
-                              color: FlutterFlowTheme.of(context).primaryText,
+                              color: FlutterTheme.of(context).primaryText,
                               size: 34.0,
                             ),
                           ),
@@ -449,7 +437,6 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
                           if (_model.searchBarTextController!.text
                               .toLowerCase()
                               .contains('qual o melhor projeto')) {
-                            // Nada acontece, é só a piada kkk
                             return;
                           }
 
@@ -487,7 +474,7 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
                                   child: device['icon'] != null
                                       ? Icon(
                                           device['icon'],
-                                          color: FlutterFlowTheme.of(context).primaryText,
+                                          color: FlutterTheme.of(context).primaryText,
                                           size: 28.0,
                                         )
                                       : (device['thumb'] != null
@@ -512,7 +499,7 @@ class _ObjetosWidgetState extends State<ObjetosWidget> {
                                   padding: const EdgeInsetsDirectional.fromSTEB(70.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     device['nome'] ?? device['name'] ?? 'Sem nome',
-                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                    style: FlutterTheme.of(context).bodyMedium.override(
                                           fontFamily: 'Inter',
                                           fontSize: 20.0,
                                           letterSpacing: 0.0,

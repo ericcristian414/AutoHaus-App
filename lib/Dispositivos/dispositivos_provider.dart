@@ -10,7 +10,6 @@ class Dispositivo {
 
 class DispositivosProvider extends ChangeNotifier {
   final List<Dispositivo> _dispositivosSelecionados = [
-    // Dispositivos pré-definidos
     Dispositivo(name: "toldo", image: "assets/images/toldohome.png"),
     Dispositivo(name: "janela", image: "assets/images/janelahome.png"),
   ];

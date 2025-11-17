@@ -1,9 +1,9 @@
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
+import '../flutter/util.dart';
+import '../flutter/form_field_controller.dart';
 import 'cronojan_widget.dart' show CronojanWidget;
 import 'package:flutter/material.dart';
 
-class CronojanModel extends FlutterFlowModel<CronojanWidget> {
+class CronojanModel extends FlutterModel<CronojanWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for Switch widget.

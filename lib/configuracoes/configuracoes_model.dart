@@ -1,9 +1,9 @@
-import '/flutter_flow/flutter_flow_util.dart';
+import '../flutter/util.dart';
 import '/index.dart';
 import 'configuracoes_widget.dart' show ConfiguracoesWidget;
 import 'package:flutter/material.dart';
 
-class ConfiguracoesModel extends FlutterFlowModel<ConfiguracoesWidget> {
+class ConfiguracoesModel extends FlutterModel<ConfiguracoesWidget> {
   @override
   void initState(BuildContext context) {}
 

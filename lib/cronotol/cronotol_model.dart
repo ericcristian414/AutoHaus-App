@@ -1,9 +1,9 @@
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
+import '../flutter/util.dart';
+import '../flutter/form_field_controller.dart';
 import 'cronotol_widget.dart' show CronotolWidget;
 import 'package:flutter/material.dart';
 
-class CronotolModel extends FlutterFlowModel<CronotolWidget> {
+class CronotolModel extends FlutterModel<CronotolWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for Switch widget.

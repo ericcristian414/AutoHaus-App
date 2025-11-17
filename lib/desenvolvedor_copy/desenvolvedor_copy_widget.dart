@@ -1,7 +1,7 @@
-import '/flutter_flow/flutter_flow_drop_down.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
+import '../flutter/drop_down.dart';
+import '../flutter/theme.dart';
+import '../flutter/util.dart';
+import '../flutter/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_haus/main.dart';
 import 'package:auto_haus/l10n/app_localizations.dart';
@@ -31,7 +31,7 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
     super.initState();
     _model = createModel(context, () => DesenvolvedorCopyModel());
     
-    _model.dropDownValue = FFAppState().selectedLanguage;
+    _model.dropDownValue = FlutterAppState().selectedLanguage;
     _model.dropDownValueController =
     FormFieldController<String>(_model.dropDownValue);
 
@@ -48,7 +48,7 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    context.watch<FlutterAppState>();
 
     return GestureDetector(
       onTap: () {
@@ -75,7 +75,7 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
                                   30.0, 215.0, 0.0, 0.0),
                               child: Text(
                                 AppLocalizations.of(context)!.idioma,
-                                style: FlutterFlowTheme.of(context)
+                                style: FlutterTheme.of(context)
                                     .titleMedium
                                     .override(
                                       fontFamily: 'Inter Tight',
@@ -93,7 +93,7 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
                                   0.0, 18.0, 0.0, 0.0),
                               child: Text(
                                 AppLocalizations.of(context)!.configuracoes,
-                                style: FlutterFlowTheme.of(context)
+                                style: FlutterTheme.of(context)
                                     .titleMedium
                                     .override(
                                       fontFamily: 'Inter Tight',
@@ -111,7 +111,7 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
                                   30.0, 85.0, 0.0, 0.0),
                               child: Text(
                                 AppLocalizations.of(context)!.ajustedeIP,
-                                style: FlutterFlowTheme.of(context)
+                                style: FlutterTheme.of(context)
                                     .titleMedium
                                     .override(
                                       fontFamily: 'Inter Tight',
@@ -124,16 +124,15 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
                           ),
                           Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(19.0, 255.0, 0.0, 0.0),
-                                    child: FlutterFlowDropDown<String>(
+                                    child: DropDown<String>(
                                       controller: _model.dropDownValueController ??=
                                           FormFieldController<String>(_model.dropDownValue),
                                       options: ['English', 'Português', 'Español'],
                                       onChanged: (val) async {
                                         safeSetState(() => _model.dropDownValue = val);
 
-                                        // Salva o idioma no AppState
-                                        FFAppState().selectedLanguage = val!;
-                                        FFAppState().update(() {}); // <= faltava o ponto e vírgula aqui!
+                                        FlutterAppState().selectedLanguage = val!;
+                                        FlutterAppState().update(() {}); 
 
                                         if (val == 'English') {
                                           MyApp.of(context).setLocale('en');
@@ -145,7 +144,7 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
                                       },
                                       width: 200.0,
                                       height: 45.0,
-                                      textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                                      textStyle: FlutterTheme.of(context).bodyMedium.override(
                                             fontFamily: 'Inter',
                                             fontSize: 15.0,
                                             letterSpacing: 0.0,
@@ -153,10 +152,10 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
                                       hintText: AppLocalizations.of(context)!.selecionar,
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,
-                                        color: FlutterFlowTheme.of(context).secondaryText,
+                                        color: FlutterTheme.of(context).secondaryText,
                                         size: 24.0,
                                       ),
-                                      fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                      fillColor: FlutterTheme.of(context).secondaryBackground,
                                       elevation: 2.0,
                                       borderColor: Colors.transparent,
                                       borderWidth: 1.0,
@@ -181,9 +180,9 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
                         controller: _model.textField1TextController,
                         focusNode: _model.textField1FocusNode,
                         onFieldSubmitted: (_) async {
-                          FFAppState().esp32ip =
+                          FlutterAppState().esp32ip =
                               _model.textField1TextController.text;
-                          FFAppState().update(() {});
+                          FlutterAppState().update(() {});
                         },
                         autofocus: false,
                         textCapitalization: TextCapitalization.none,
@@ -193,7 +192,7 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
                           isDense: true,
                           labelText: AppLocalizations.of(context)!.ipdoesp,
                           labelStyle:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                              FlutterTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
                                     fontSize: 15.0,
                                     letterSpacing: 0.0,
@@ -201,7 +200,7 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
                           alignLabelWithHint: false,
                           hintText: 'ex: 192.168.178.146',
                           hintStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
+                              FlutterTheme.of(context).labelMedium.override(
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
                                   ),
@@ -221,23 +220,23 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
                           ),
                           errorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
+                              color: FlutterTheme.of(context).error,
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
+                              color: FlutterTheme.of(context).error,
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
                           fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                              FlutterTheme.of(context).secondaryBackground,
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        style: FlutterTheme.of(context).bodyMedium.override(
                               fontFamily: 'Inter',
                               fontSize: 15.0,
                               letterSpacing: 0.0,
@@ -254,8 +253,8 @@ class _DesenvolvedorCopyWidgetState extends State<DesenvolvedorCopyWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(30.0, 180.0, 0.0, 0.0),
                 child: Text(
-                  FFAppState().esp32ip,
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  FlutterAppState().esp32ip,
+                  style: FlutterTheme.of(context).bodyMedium.override(
                         fontFamily: 'Inter',
                         letterSpacing: 0.0,
                       ),

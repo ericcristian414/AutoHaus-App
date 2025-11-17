@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:flutter_background_service_android/flutter_background_service_android.dart'; // Importe isso
+import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:auto_haus/notifications/notification_service.dart';
@@ -15,7 +15,6 @@ void onStart(ServiceInstance service) async {
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService.initialize();
 
-  // Se o serviço for uma instância do Android, configure os listeners
   if (service is AndroidServiceInstance) {
     service.on('setAsForeground').listen((event) {
       service.setAsForegroundService();
@@ -30,7 +29,6 @@ void onStart(ServiceInstance service) async {
     service.stopSelf();
   });
 
-  // A lógica MQTT permanece a mesma
   MqttServerClient? client;
   String? ultimoStatusChuva; 
 
@@ -84,6 +82,5 @@ void onStart(ServiceInstance service) async {
     });
   }
 
-  // Inicia a conexão MQTT
   await connectAndListen();
 }

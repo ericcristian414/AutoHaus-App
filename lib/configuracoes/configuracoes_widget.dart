@@ -1,6 +1,6 @@
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import '../flutter/theme.dart';
+import '../flutter/util.dart';
+import '../flutter/widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'configuracoes_model.dart';
@@ -73,7 +73,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                         EdgeInsetsDirectional.fromSTEB(45.0, 104.0, 0.0, 0.0),
                     child: Text(
                       'Controle dos Motores',
-                      style: FlutterFlowTheme.of(context).titleMedium.override(
+                      style: FlutterTheme.of(context).titleMedium.override(
                             fontFamily: 'Inter Tight',
                             color: Colors.white,
                             letterSpacing: 0.0,
@@ -85,7 +85,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                         EdgeInsetsDirectional.fromSTEB(45.0, 214.0, 0.0, 0.0),
                     child: Text(
                       'Ajuste do IP',
-                      style: FlutterFlowTheme.of(context).titleMedium.override(
+                      style: FlutterTheme.of(context).titleMedium.override(
                             fontFamily: 'Inter Tight',
                             color: Colors.white,
                             letterSpacing: 0.0,
@@ -106,7 +106,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                         115.0, 30.0, 115.0, 300.0),
                     child: Text(
                       'Configurações',
-                      style: FlutterFlowTheme.of(context).titleMedium.override(
+                      style: FlutterTheme.of(context).titleMedium.override(
                             fontFamily: 'Inter Tight',
                             color: Colors.white,
                             fontSize: 25.0,
@@ -120,7 +120,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                         EdgeInsetsDirectional.fromSTEB(45.0, 159.0, 0.0, 0.0),
                     child: Text(
                       'Ajuste das Velocidades',
-                      style: FlutterFlowTheme.of(context).titleMedium.override(
+                      style: FlutterTheme.of(context).titleMedium.override(
                             fontFamily: 'Inter Tight',
                             color: Colors.white,
                             letterSpacing: 0.0,
@@ -132,7 +132,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                         EdgeInsetsDirectional.fromSTEB(15.0, 213.0, 100.0, 0.0),
                     child: Icon(
                       Icons.wifi,
-                      color: FlutterFlowTheme.of(context).primaryText,
+                      color: FlutterTheme.of(context).primaryText,
                       size: 24.0,
                     ),
                   ),
@@ -150,7 +150,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                         EdgeInsetsDirectional.fromSTEB(15.0, 158.0, 100.0, 0.0),
                     child: Icon(
                       Icons.speed,
-                      color: FlutterFlowTheme.of(context).primaryText,
+                      color: FlutterTheme.of(context).primaryText,
                       size: 25.0,
                     ),
                   ),
@@ -159,19 +159,19 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                         EdgeInsetsDirectional.fromSTEB(15.0, 102.0, 0.0, 0.0),
                     child: Icon(
                       Icons.control_camera_outlined,
-                      color: FlutterFlowTheme.of(context).primaryText,
+                      color: FlutterTheme.of(context).primaryText,
                       size: 25.0,
                     ),
                   ),
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(6.0, 145.0, 6.0, 0.0),
-                    child: FFButtonWidget(
+                    child: FlutterButtonWidget(
                       onPressed: () async {
                         context.pushNamed(VelocidadesWidget.routeName);
                       },
                       text: 'Button',
-                      options: FFButtonOptions(
+                      options: FlutterButtonOptions(
                         width: 500.0,
                         height: 50.0,
                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -180,7 +180,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: Colors.transparent,
                         textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
+                            FlutterTheme.of(context).titleSmall.override(
                                   fontFamily: 'Inter Tight',
                                   color: Color(0x00FFFFFF),
                                   letterSpacing: 0.0,
@@ -197,12 +197,12 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(6.0, 90.0, 6.0, 0.0),
-                    child: FFButtonWidget(
+                    child: FlutterButtonWidget(
                       onPressed: () async {
                         context.pushNamed(DesenvolvedorWidget.routeName);
                       },
                       text: 'Button',
-                      options: FFButtonOptions(
+                      options: FlutterButtonOptions(
                         width: 401.0,
                         height: 50.0,
                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -211,7 +211,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: Colors.transparent,
                         textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
+                            FlutterTheme.of(context).titleSmall.override(
                                   fontFamily: 'Inter Tight',
                                   color: Color(0x00FFFFFF),
                                   letterSpacing: 0.0,
@@ -230,20 +230,20 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                     child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 0.0, 0.0),
-                      child: FFButtonWidget(
+                      child: FlutterButtonWidget(
                         onPressed: () async {
                           context.pushNamed(HomePageWidget.routeName);
                         },
                         text: 'Button',
-                        options: FFButtonOptions(
+                        options: FlutterButtonOptions(
                           height: 40.0,
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: FlutterTheme.of(context).primary,
                           textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
+                              FlutterTheme.of(context).titleSmall.override(
                                     fontFamily: 'Inter Tight',
                                     color: Colors.white,
                                     letterSpacing: 0.0,
@@ -257,12 +257,12 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(6.0, 200.0, 6.0, 0.0),
-                    child: FFButtonWidget(
+                    child: FlutterButtonWidget(
                       onPressed: () async {
                         context.pushNamed(DesenvolvedorCopyWidget.routeName);
                       },
                       text: 'Button',
-                      options: FFButtonOptions(
+                      options: FlutterButtonOptions(
                         width: 500.0,
                         height: 50.0,
                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -271,7 +271,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: Colors.transparent,
                         textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
+                            FlutterTheme.of(context).titleSmall.override(
                                   fontFamily: 'Inter Tight',
                                   color: Color(0x00FFFFFF),
                                   letterSpacing: 0.0,

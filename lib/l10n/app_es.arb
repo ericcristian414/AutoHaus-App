@@ -1,5 +1,6 @@
 {
   "janela": "Ventana",
+  "janelaPrototipo": "Ventana Prototipo",
   "controleManual": "Control Manual",
   "detecaoChuva": "Detección de Lluvia:",
   "modoAutomatico": "Modo Automático",

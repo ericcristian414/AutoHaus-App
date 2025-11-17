@@ -1,13 +1,13 @@
 import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/instant_timer.dart';
+import '../flutter/util.dart';
+import '../flutter/instant_timer.dart';
 import '/index.dart';
 import 'dart:async';
 import 'janela_widget.dart' show JanelaWidget;
 import 'package:flutter/material.dart';
 
 
-class JanelaModel extends FlutterFlowModel<JanelaWidget> {
+class JanelaModel extends FlutterModel<JanelaWidget> {
   ///  State fields for stateful widgets in this page.
 
   InstantTimer? instantTimer;
@@ -18,8 +18,16 @@ class JanelaModel extends FlutterFlowModel<JanelaWidget> {
   ApiCallResponse? apiResult4tx;
   // State field(s) for Switch widget.
   bool? switchValue1;
+
+  bool? switchValue3;
+
+  bool? switchValue4;
+
+
   // State field(s) for Slider12 widget.
   double? slider1Value;
+
+  double? slider2Value;
   // Stores action output result for [Backend Call - API (Slider Janela)] action in Slider12 widget.
   ApiCallResponse? apiResultjjf;
   // State field(s) for Switch widget.

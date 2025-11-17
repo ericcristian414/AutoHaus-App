@@ -1,12 +1,12 @@
 import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/instant_timer.dart';
+import '../flutter/util.dart';
+import '../flutter/instant_timer.dart';
 import '/index.dart';
 import 'dart:async';
 import 'toldo_widget.dart' show ToldoWidget;
 import 'package:flutter/material.dart';
 
-class ToldoModel extends FlutterFlowModel<ToldoWidget> {
+class ToldoModel extends FlutterModel<ToldoWidget> {
   ///  State fields for stateful widgets in this page.
 
   InstantTimer? instantTimer;

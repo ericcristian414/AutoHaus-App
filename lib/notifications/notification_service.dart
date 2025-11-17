@@ -7,8 +7,6 @@ class NotificationService {
       FlutterLocalNotificationsPlugin();
 
   static void initialize() {
-    // MUDANÇA 1: Usar o novo ícone pequeno para a barra de status.
-    // O nome deve ser exatamente o mesmo do arquivo, sem a extensão .png.
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@drawable/ic_stat_logo');
 
@@ -22,7 +20,6 @@ class NotificationService {
     required String title,
     required String body,
   }) async {
-    // MUDANÇA 2: Definir o novo ícone grande para a notificação expandida.
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
       'rain_channel_id',
@@ -31,8 +28,6 @@ class NotificationService {
       importance: Importance.max,
       priority: Priority.high,
       showWhen: true,
-      // Adiciona o ícone grande que aparece quando a notificação é expandida.
-      // O nome deve ser exatamente o mesmo do arquivo, sem a extensão .png.
       
     );
 

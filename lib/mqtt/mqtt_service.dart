@@ -22,18 +22,15 @@ class MQTTService {
     client.onSubscribed = onSubscribed;
     client.pongCallback = onPong;
     client.useWebSocket = true;
-    client.websocketProtocols = ['mqtt']; // ou deixe padrão
+    client.websocketProtocols = ['mqtt']; 
     client.secure = true;
 
-    /// TLS/SSL
     client.useWebSocket = true;
     client.websocketProtocols = ['mqtt'];
 
-    /// Security context
     client.securityContext = SecurityContext.defaultContext;
   }
 
-  /// Conectar no Broker
   Future<void> connect() async {
     client.connectionMessage = MqttConnectMessage()
         .withClientIdentifier(clientId)
@@ -56,7 +53,6 @@ class MQTTService {
     }
   }
 
-  /// Publicar mensagem
   void publish(String topic, String message) {
     final builder = MqttClientPayloadBuilder();
     builder.addString(message);
@@ -64,7 +60,6 @@ class MQTTService {
     print('Publicado no tópico $topic: $message');
   }
 
-  /// Inscrever-se e receber mensagens
   Stream<String> subscribe(String topic) {
     client.subscribe(topic, MqttQos.atLeastOnce);
 
@@ -77,13 +72,11 @@ class MQTTService {
     });
   }
 
-  /// Desconectar
   void disconnect() {
     client.disconnect();
     print('Desconectado do MQTT');
   }
 
-  /// Callbacks
   void onSubscribed(String topic) {
     print('Inscrito no tópico: $topic');
   }

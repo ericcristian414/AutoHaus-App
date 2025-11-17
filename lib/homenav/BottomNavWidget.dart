@@ -4,7 +4,7 @@ import '/pages/home_page/home_page_widget.dart';
 import '/velocidades/velocidades_widget.dart';
 import '/desenvolvedor/desenvolvedor_widget.dart';
 import '/desenvolvedor_copy/desenvolvedor_copy_widget.dart';
-import '/flutter_flow/flutter_flow_util.dart';
+import '../flutter/util.dart';
 import 'package:auto_haus/l10n/app_localizations.dart';
 
 class BottomNavWidget extends StatefulWidget {
@@ -26,16 +26,16 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
   }
 
   final List<Widget> _pages = [
-    HomePageWidget(), // Página Home
-    VelocidadesWidget(), // Página Velocidades
-    DesenvolvedorWidget(), // Página Controle dos Motores
-    DesenvolvedorCopyWidget(), // Página Ajuste de IP
+    HomePageWidget(), 
+    VelocidadesWidget(), 
+    DesenvolvedorWidget(), 
+    DesenvolvedorCopyWidget(),
   ];
 
  @override
 Widget build(BuildContext context) {
   return Scaffold(
-    backgroundColor: Color(0xFF010B14), // Fundo igual ao BottomNavigationBar
+    backgroundColor: Color(0xFF010B14), 
     body: _pages[_currentIndex],
     bottomNavigationBar: ClipRRect(
       borderRadius: BorderRadius.only(
@@ -48,7 +48,7 @@ Widget build(BuildContext context) {
           border: Border(
             top: BorderSide(
               color: Colors.white,
-              width: 0.1, // Aqui a bordinha de 0.1
+              width: 0.1,
             ),
           ),
         ),

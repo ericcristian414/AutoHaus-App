@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'flutter_flow/flutter_flow_util.dart';
+import 'flutter/util.dart';
 import 'mqtt/mqtt_service.dart';
 import 'dart:convert';
 
 
 
-class FFAppState extends ChangeNotifier {
-  static FFAppState _instance = FFAppState._internal();
+class FlutterAppState extends ChangeNotifier {
+  static FlutterAppState _instance = FlutterAppState._internal();
 
-  factory FFAppState() {
+  factory FlutterAppState() {
     return _instance;
   }
 
-  FFAppState._internal() {
+  FlutterAppState._internal() {
     mqttService = MQTTService(
       clientId: 'flutter_client_${DateTime.now().millisecondsSinceEpoch}',
     );
   }
 
   static void reset() {
-    _instance = FFAppState._internal();
+    _instance = FlutterAppState._internal();
   }
 
   late MQTTService mqttService;
@@ -57,7 +57,7 @@ class FFAppState extends ChangeNotifier {
     _esp32ip = value;
   }
 
-  String _selectedLanguage = 'Portuguese'; // padrão
+  String _selectedLanguage = 'Portuguese';
   String get selectedLanguage => _selectedLanguage;
   set selectedLanguage(String val) {
   _selectedLanguage = val;
@@ -141,9 +141,21 @@ class FFAppState extends ChangeNotifier {
     _sliderChuvaJanela = value;
   }
 
+  bool _sliderChuvaJanelaReal = false;
+  bool get sliderChuvaJanelaReal => _sliderChuvaJanelaReal;
+  set sliderChuvaJanelaReal(bool value) {
+    _sliderChuvaJanelaReal = value;
+  }
+
   bool _sliderjanela = false;
   bool get sliderjanela => _sliderjanela;
   set sliderjanela(bool value) {
     _sliderjanela = value;
+  }
+
+  bool _sliderjanelaReal = false;
+  bool get sliderjanelaReal => _sliderjanelaReal;
+  set sliderjanelaReal(bool value) {
+    _sliderjanelaReal = value;
   }
 }

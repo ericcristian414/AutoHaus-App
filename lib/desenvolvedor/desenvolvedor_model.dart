@@ -1,10 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_util.dart';
+import '../flutter/util.dart';
 import '/index.dart';
 import 'desenvolvedor_widget.dart' show DesenvolvedorWidget;
 import 'package:flutter/material.dart';
 
-class DesenvolvedorModel extends FlutterFlowModel<DesenvolvedorWidget> {
+class DesenvolvedorModel extends FlutterModel<DesenvolvedorWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (Motor A Tras)] action in Button widget.

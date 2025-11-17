@@ -1,5 +1,6 @@
 {
   "janela": "Window",
+  "janelaPrototipo": "Prototype Window",
   "controleManual": "Manual Control",
   "detecaoChuva": "Rain Detection:",
   "modoAutomatico":"Automatic Mode",

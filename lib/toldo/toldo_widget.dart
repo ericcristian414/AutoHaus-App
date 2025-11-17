@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:provider/provider.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import '../flutter/theme.dart';
+import '../flutter/util.dart';
+import '../flutter/widgets.dart';
 import 'package:auto_haus/l10n/app_localizations.dart';
 
 import 'toldo_model.dart';
@@ -50,8 +50,8 @@ class _ToldoWidgetState extends State<ToldoWidget> {
     _topicSensorEstado = '$_topicBase/sensor/estado';
     _topicSensorConfig = '$_topicBase/sensor/config';
 
-    _model.switchValue1 = FFAppState().sliderswitchtoldo;
-    _model.switchValue2 = FFAppState().sliderfudido;
+    _model.switchValue1 = FlutterAppState().sliderswitchtoldo;
+    _model.switchValue2 = FlutterAppState().sliderfudido;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _connect();
@@ -162,7 +162,7 @@ class _ToldoWidgetState extends State<ToldoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    context.watch<FlutterAppState>();
 
     return GestureDetector(
       onTap: () {
@@ -214,7 +214,7 @@ class _ToldoWidgetState extends State<ToldoWidget> {
                                             children: [
                                               TextSpan(
                                                 text: '${AppLocalizations.of(context)!.detecaoChuva} ',
-                                                style: FlutterFlowTheme.of(context).titleMedium.override(
+                                                style: FlutterTheme.of(context).titleMedium.override(
                                                       fontFamily: 'Inter Tight',
                                                       color: Colors.white,
                                                       letterSpacing: 0.0,
@@ -224,7 +224,7 @@ class _ToldoWidgetState extends State<ToldoWidget> {
                                                 text: _statusChuva == 'SECO'
                                                     ? AppLocalizations.of(context)!.limpo
                                                     : AppLocalizations.of(context)!.umido,
-                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                style: FlutterTheme.of(context).bodyMedium.override(
                                                       fontFamily: 'Inter',
                                                       color: _statusChuva == 'SECO'
                                                           ? Color(0xE639D258)
@@ -244,17 +244,17 @@ class _ToldoWidgetState extends State<ToldoWidget> {
                                   alignment: AlignmentDirectional(0.0, -1.0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(50.0, 35.0, 50.0, 10.0),
-                                    child: FFButtonWidget(
+                                    child: FlutterButtonWidget(
                                       onPressed: () => _publishCommand(_topicToldoCmd, "ABRIR"),
                                       text: AppLocalizations.of(context)!.abrir,
-                                      icon: Icon(Icons.arrow_upward, color: FlutterFlowTheme.of(context).info, size: 24.0),
-                                      options: FFButtonOptions(
+                                      icon: Icon(Icons.arrow_upward, color: FlutterTheme.of(context).info, size: 24.0),
+                                      options: FlutterButtonOptions(
                                         width: 140.0,
                                         height: 60.0,
-                                        color: FlutterFlowTheme.of(context).primary,
-                                        textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                        color: FlutterTheme.of(context).primary,
+                                        textStyle: FlutterTheme.of(context).titleSmall.override(
                                               fontFamily: 'Inter Tight',
-                                              color: FlutterFlowTheme.of(context).info,
+                                              color: FlutterTheme.of(context).info,
                                             ),
                                         borderRadius: BorderRadius.circular(8.0),
                                       ),
@@ -265,17 +265,17 @@ class _ToldoWidgetState extends State<ToldoWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(50.0, 10.0, 50.0, 190.0),
-                                    child: FFButtonWidget(
+                                    child: FlutterButtonWidget(
                                       onPressed: () => _publishCommand(_topicToldoCmd, "FECHAR"),
                                       text: AppLocalizations.of(context)!.recolher,
-                                      icon: Icon(Icons.arrow_downward_sharp, color: FlutterFlowTheme.of(context).info, size: 24.0),
-                                      options: FFButtonOptions(
+                                      icon: Icon(Icons.arrow_downward_sharp, color: FlutterTheme.of(context).info, size: 24.0),
+                                      options: FlutterButtonOptions(
                                         width: 140.0,
                                         height: 60.0,
                                         color: Color(0xFF272C32),
-                                        textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                        textStyle: FlutterTheme.of(context).titleSmall.override(
                                               fontFamily: 'Inter Tight',
-                                              color: FlutterFlowTheme.of(context).info,
+                                              color: FlutterTheme.of(context).info,
                                             ),
                                         borderRadius: BorderRadius.circular(8.0),
                                       ),
@@ -302,14 +302,14 @@ class _ToldoWidgetState extends State<ToldoWidget> {
                                                 children: [
                                                   TextSpan(
                                                     text: '${AppLocalizations.of(context)!.controleManual}:  ',
-                                                    style: FlutterFlowTheme.of(context).titleMedium.override(
+                                                    style: FlutterTheme.of(context).titleMedium.override(
                                                           fontFamily: 'Inter Tight',
                                                           color: Colors.white,
                                                         ),
                                                   ),
                                                   TextSpan(
                                                     text: '${_posicaoToldo.round()}%',
-                                                    style: FlutterFlowTheme.of(context).titleMedium.override(
+                                                    style: FlutterTheme.of(context).titleMedium.override(
                                                           fontFamily: 'Inter Tight',
                                                           color: Colors.white,
                                                         ),
@@ -328,10 +328,10 @@ class _ToldoWidgetState extends State<ToldoWidget> {
                                               onChanged: (newValue) async {
                                                 safeSetState(() => _model.switchValue1 = newValue);
                                               },
-                                              activeColor: FlutterFlowTheme.of(context).primaryText,
-                                              activeTrackColor: FlutterFlowTheme.of(context).primary,
+                                              activeColor: FlutterTheme.of(context).primaryText,
+                                              activeTrackColor: FlutterTheme.of(context).primary,
                                               inactiveTrackColor: Color(0xFF98999A),
-                                              inactiveThumbColor: FlutterFlowTheme.of(context).primaryText,
+                                              inactiveThumbColor: FlutterTheme.of(context).primaryText,
                                             ),
                                           ),
                                         ),
@@ -388,14 +388,14 @@ class _ToldoWidgetState extends State<ToldoWidget> {
                               children: [
                                 Text(
                                   AppLocalizations.of(context)!.modoAutomatico,
-                                  style: FlutterFlowTheme.of(context).titleMedium.override(
+                                  style: FlutterTheme.of(context).titleMedium.override(
                                         fontFamily: 'Inter Tight',
                                         color: Colors.white,
                                       ),
                                 ),
                                 Text(
                                   AppLocalizations.of(context)!.controleClima,
-                                  style: FlutterFlowTheme.of(context).bodySmall.override(
+                                  style: FlutterTheme.of(context).bodySmall.override(
                                         fontFamily: 'Inter',
                                         color: Color(0xFF95A1AC),
                                       ),
@@ -408,10 +408,10 @@ class _ToldoWidgetState extends State<ToldoWidget> {
                                 safeSetState(() => _model.switchValue2 = newValue);
                                 _publishJsonCommand(_topicSensorConfig, {"movToldoAuto": newValue});
                               },
-                              activeColor: FlutterFlowTheme.of(context).info,
-                              activeTrackColor: FlutterFlowTheme.of(context).primary,
+                              activeColor: FlutterTheme.of(context).info,
+                              activeTrackColor: FlutterTheme.of(context).primary,
                               inactiveTrackColor: Color(0xFF98999A),
-                              inactiveThumbColor: FlutterFlowTheme.of(context).primaryText,
+                              inactiveThumbColor: FlutterTheme.of(context).primaryText,
                             ),
                           ],
                         ),
@@ -426,7 +426,7 @@ class _ToldoWidgetState extends State<ToldoWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 300.0),
                   child: Text(
                     AppLocalizations.of(context)!.toldo,
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    style: FlutterTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
                           color: Colors.white,
                           fontSize: 25.0,

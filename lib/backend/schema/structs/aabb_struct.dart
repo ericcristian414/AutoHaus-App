@@ -1,8 +1,6 @@
-// ignore_for_file: unnecessary_getters_setters
-
 import '/backend/schema/util/schema_util.dart';
 import 'index.dart';
-import '/flutter_flow/flutter_flow_util.dart';
+import '../../../flutter/util.dart';
 
 class AabbStruct extends BaseStruct {
   AabbStruct({
@@ -13,17 +11,14 @@ class AabbStruct extends BaseStruct {
         _aberto = aberto,
         _aberta = aberta;
 
-  // "estado" field.
   String? _estado;
   String get estado => _estado ?? 'SECO';
   set estado(String? val) => _estado = val;
-
-  // "aberto" field (toldo).
+  
   int? _aberto;
   int get aberto => _aberto ?? 0;
   set aberto(int? val) => _aberto = val;
 
-  // "aberta" field (janela).
   int? _aberta;
   int get aberta => _aberta ?? 0;
   set aberta(int? val) => _aberta = val;

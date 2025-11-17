@@ -5,10 +5,10 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'dart:async';
 import 'dart:io';
 
-import '/flutter_flow/flutter_flow_theme.dart';
-import 'flutter_flow/flutter_flow_util.dart';
-import 'flutter_flow/internationalization.dart';
-import 'flutter_flow/nav/nav.dart';
+import 'flutter/theme.dart';
+import 'flutter/util.dart';
+import 'flutter/internationalization.dart';
+import 'flutter/nav/nav.dart';
 import 'index.dart';
 import 'mqtt/mqtt_service.dart';
 import 'Dispositivos/dispositivos_provider.dart';
@@ -41,9 +41,9 @@ void main() async {
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
 
-  await FlutterFlowTheme.initialize();
+  await FlutterTheme.initialize();
 
-  final appState = FFAppState();
+  final appState = FlutterAppState();
   await appState.initializePersistedState();
 
   runApp(
@@ -67,7 +67,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
-  ThemeMode _themeMode = FlutterFlowTheme.themeMode;
+  ThemeMode _themeMode = FlutterTheme.themeMode;
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
 
@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
 
   void setThemeMode(ThemeMode mode) => safeSetState(() {
         _themeMode = mode;
-        FlutterFlowTheme.saveThemeMode(mode);
+        FlutterTheme.saveThemeMode(mode);
       });
 
   @override

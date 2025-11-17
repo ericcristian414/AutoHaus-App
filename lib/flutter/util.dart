@@ -18,13 +18,13 @@ export 'lat_lng.dart';
 export 'place.dart';
 export 'uploaded_file.dart';
 export '../app_state.dart';
-export 'flutter_flow_model.dart';
+export 'model.dart';
 export 'dart:math' show min, max;
 export 'dart:typed_data' show Uint8List;
 export 'dart:convert' show jsonEncode, jsonDecode;
 export 'package:intl/intl.dart';
 export 'package:page_transition/page_transition.dart';
-export 'internationalization.dart' show FFLocalizations;
+export 'internationalization.dart' show FlutterLocalizations;
 export 'nav/nav.dart';
 
 T valueOrDefault<T>(T? value, T defaultValue) =>
@@ -169,11 +169,8 @@ T? castToType<T>(dynamic value) {
   }
   switch (T) {
     case double:
-      // Doubles may be stored as ints in some cases.
       return value.toDouble() as T;
     case int:
-      // Likewise, ints may be stored as doubles. If this is the case
-      // (i.e. no decimal value), return the value as an int.
       if (value is num && value.toInt() == value) {
         return value.toInt() as T;
       }
@@ -249,7 +246,7 @@ const kTextValidatorEmailRegex =
 const kTextValidatorWebsiteRegex =
     r'(https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,10}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,10}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)';
 
-extension FFTextEditingControllerExt on TextEditingController? {
+extension FlutterTextEditingControllerExt on TextEditingController? {
   String get text => this == null ? '' : this!.text;
   set text(String newText) => this?.text = newText;
 }
@@ -308,7 +305,7 @@ void showSnackbar(
   );
 }
 
-extension FFStringExt on String {
+extension FlutterStringExt on String {
   String maybeHandleOverflow({int? maxChars, String replacement = ''}) =>
       maxChars != null && length > maxChars
           ? replaceRange(maxChars, null, replacement)
@@ -358,17 +355,14 @@ extension ListDivideExt<T extends Widget> on Iterable<T> {
 }
 
 extension StatefulWidgetExtensions on State<StatefulWidget> {
-  /// Check if the widget exist before safely setting state.
   void safeSetState(VoidCallback fn) {
     if (mounted) {
-      // ignore: invalid_use_of_protected_member
       setState(fn);
     }
   }
 }
 
-// For iOS 16 and below, set the status bar color to match the app's theme.
-// https://github.com/flutter/flutter/issues/41067
+
 Brightness? _lastBrightness;
 void fixStatusBarOniOS16AndBelow(BuildContext context) {
   if (!isiOS) {

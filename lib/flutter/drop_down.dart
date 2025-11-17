@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class FlutterFlowDropDown<T> extends StatelessWidget {
-  const FlutterFlowDropDown({
+class DropDown<T> extends StatelessWidget {
+  const DropDown({
     Key? key,
     required this.options,
     required this.onChanged,
@@ -49,7 +49,7 @@ class FlutterFlowDropDown<T> extends StatelessWidget {
       height: height ?? 50.0,
       margin: margin,
       decoration: BoxDecoration(
-        color: fillColor ?? Colors.grey.shade900, // Cor cinza escuro
+        color: fillColor ?? Colors.grey.shade900, 
         borderRadius: BorderRadius.circular(borderRadius ?? 8.0),
         border: Border.all(
           color: borderColor ?? Colors.grey.shade700,
@@ -59,7 +59,7 @@ class FlutterFlowDropDown<T> extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<T>(
-          dropdownColor: fillColor ?? Colors.grey.shade900, // fundo da lista
+          dropdownColor: fillColor ?? Colors.grey.shade900,
           value: controller?.value,
           isExpanded: true,
           icon: icon ??
@@ -92,7 +92,6 @@ class FlutterFlowDropDown<T> extends StatelessWidget {
                       color: Colors.white,
                     ),
           ),
-          // Configuração da borda arredondada quando a lista é aberta
           selectedItemBuilder: (BuildContext context) {
   return options.map<Widget>((T value) {
     return Container(

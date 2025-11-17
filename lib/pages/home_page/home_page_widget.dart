@@ -1,9 +1,9 @@
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
+import '../../flutter/theme.dart';
+import '../../flutter/util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/Dispositivos/dispositivos_provider.dart'; // Importe o provider
+import '/Dispositivos/dispositivos_provider.dart'; 
 import 'home_page_model.dart';
 import 'package:auto_haus/l10n/app_localizations.dart';
 export 'home_page_model.dart';
@@ -71,7 +71,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             top: true,
             child: Column(
               children: [
-                // Cabeçalho
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                   child: Row(
@@ -79,7 +78,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     children: [
                       Text(
                         'HOME',
-                        style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        style: FlutterTheme.of(context).headlineMedium.override(
                               fontFamily: 'Inter Tight',
                               color: Colors.white,
                               fontSize: 25,
@@ -88,9 +87,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                       IconButton(
                         icon: Icon(Icons.add, size: 27),
-                        color: FlutterFlowTheme.of(context).primaryText,
+                        color: FlutterTheme.of(context).primaryText,
                         onPressed: () {
-                          // Navegar para a página de adicionar dispositivos
                           context.pushNamed(ObjetosWidget.routeName);
                         },
                       ),
@@ -98,7 +96,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ),
 
-                // Grid de dispositivos dinâmico
                 Expanded(
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
@@ -126,7 +123,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   }
 
       Widget _buildDispositivoCard(Dispositivo dispositivo) {
-    // Cor baseada no nome do dispositivo
     final bool isToldoOuJanela = dispositivo.name == "janela" || dispositivo.name == "toldo" ;
     final Color corPrincipal = isToldoOuJanela ? Color(0xFF059FD1) : Color(0xFF4F5C69);
 
@@ -138,7 +134,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       ),
       child: Stack(
         children: [
-          // Ícone ou Imagem central
           Align(
             alignment: Alignment.center,
             child: dispositivo.icon != null
@@ -147,7 +142,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     child: Icon(
                       dispositivo.icon,
                       size: 95,
-                      color: corPrincipal, // Ícone com cor personalizada
+                      color: corPrincipal, 
                     ),
                   )
                 : Padding(
@@ -164,14 +159,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
           ),
 
-          // Texto do nome
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: EdgeInsets.only(bottom: 18),
               child: Text(
                 AppLocalizations.of(context)!.traduzirDispositivo(dispositivo.name),
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                style: FlutterTheme.of(context).headlineMedium.override(
                       fontFamily: 'Inter Tight',
                       color: corPrincipal,
                       fontSize: 21,
@@ -181,7 +175,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ),
           ),
 
-          // Botão cobrindo todo o card
           Positioned.fill(
             child: Material(
               color: Colors.transparent,

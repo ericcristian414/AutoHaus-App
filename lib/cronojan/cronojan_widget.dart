@@ -1,8 +1,8 @@
-import '/flutter_flow/flutter_flow_drop_down.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
+import '../flutter/drop_down.dart';
+import '../flutter/theme.dart';
+import '../flutter/util.dart';
+import '../flutter/widgets.dart';
+import '../flutter/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_haus/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +32,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
 
     FormFieldController<String>(_model.dropDownValue);
 
-    _model.switchValue = FFAppState().sliderswitchtoldo;
+    _model.switchValue = FlutterAppState().sliderswitchtoldo;
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
@@ -49,7 +49,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
+    context.watch<FlutterAppState>();
 
     return GestureDetector(
       onTap: () {
@@ -75,7 +75,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                         child: Text(
                           AppLocalizations.of(context)!.cronoJanela,
                           style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                              FlutterTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
                                     color: Colors.white,
                                     fontSize: 25.0,
@@ -99,20 +99,20 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             10.0, 12.0, 0.0, 0.0),
-                        child: FFButtonWidget(
+                        child: FlutterButtonWidget(
                           onPressed: () async {
                             context.safePop();
                           },
                           text: 'Button',
-                          options: FFButtonOptions(
+                          options: FlutterButtonOptions(
                             width: 80.0,
                             height: 70.0,
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
+                            color: FlutterTheme.of(context).primary,
+                            textStyle: FlutterTheme.of(context)
                                 .titleSmall
                                 .override(
                                   fontFamily: 'Inter Tight',
@@ -165,7 +165,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                             child: Text(
                                               AppLocalizations.of(context)!.abreEfecha,
                                               style:
-                                                  FlutterFlowTheme.of(context)
+                                                  FlutterTheme.of(context)
                                                       .titleMedium
                                                       .override(
                                                         fontFamily:
@@ -187,15 +187,15 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                                   .switchValue = newValue);
                                             },
                                             activeColor:
-                                                FlutterFlowTheme.of(context)
+                                                FlutterTheme.of(context)
                                                     .primaryText,
                                             activeTrackColor:
-                                                FlutterFlowTheme.of(context)
+                                                FlutterTheme.of(context)
                                                     .primary,
                                             inactiveTrackColor:
                                                 Color(0xFF98999A),
                                             inactiveThumbColor:
-                                                FlutterFlowTheme.of(context)
+                                                FlutterTheme.of(context)
                                                     .primaryText,
                                           ),
                                         ),
@@ -210,9 +210,8 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                     child: TextFormField(
                                       controller: _model.textController1,
                                       focusNode: _model.textFieldFocusNode1,
-                                      readOnly: true, // Impede a digitação manual
+                                      readOnly: true,
                                       onTap: () async {
-                                        // Abre o TimePicker
                                         final TimeOfDay? pickedTime = await showTimePicker(
                                           context: context,
                                           initialTime: TimeOfDay.now(),
@@ -220,7 +219,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                             return Theme(
                                               data: ThemeData.light().copyWith(
                                                 colorScheme: ColorScheme.dark(
-                                                  primary: FlutterFlowTheme.of(context).primary, // Cor do seletor
+                                                  primary: FlutterTheme.of(context).primary,
                                                 ),
                                               ),
                                               child: child!,
@@ -229,7 +228,6 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                         );
                                 
                                         if (pickedTime != null) {
-                                          // Formata a hora selecionada (ex: "07:30 AM")
                                           final formattedTime = pickedTime.format(context);
                                           _model.textController1.text = formattedTime;
                                         }
@@ -237,23 +235,23 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                       decoration: InputDecoration(
                                         isDense: true,
                                         labelText: AppLocalizations.of(context)!.abrirJanela,
-                                        labelStyle: FlutterFlowTheme.of(context)
+                                        labelStyle: FlutterTheme.of(context)
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Inter',
-                                              color: const Color.fromARGB(255, 189, 187, 187), // Define a cor branca
+                                              color: const Color.fromARGB(255, 189, 187, 187), 
                                               letterSpacing: 0.0,
                                             ),
-                                        floatingLabelStyle: FlutterFlowTheme.of(context)
+                                        floatingLabelStyle: FlutterTheme.of(context)
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Inter',
-                                              color: Colors.white, // Garante que a cor permaneça branca em foco
+                                              color: Colors.white,
                                               letterSpacing: 0.0,
                                             ),
                                         floatingLabelBehavior: FloatingLabelBehavior.always,
                                         hintText: 'Ex: 12:00PM',
-                                        hintStyle: FlutterFlowTheme.of(context)
+                                        hintStyle: FlutterTheme.of(context)
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Inter',
@@ -269,7 +267,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: FlutterTheme.of(context)
                                                 .secondaryText,
                                             width: 1.5,
                                           ),
@@ -278,7 +276,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: FlutterTheme.of(context)
                                                 .secondaryText,
                                             width: 1.5,
                                           ),
@@ -287,7 +285,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: FlutterTheme.of(context)
                                                 .secondaryText,
                                             width: 1.5,
                                           ),
@@ -295,17 +293,17 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                               BorderRadius.circular(8.0),
                                         ),
                                         filled: true,
-                                        fillColor: FlutterFlowTheme.of(context)
+                                        fillColor: FlutterTheme.of(context)
                                             .secondaryBackground,
                                       ),
-                                      style: FlutterFlowTheme.of(context)
+                                      style: FlutterTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
                                             letterSpacing: 0.0,
                                           ),
                                       keyboardType: TextInputType.datetime,
-                                      cursorColor: FlutterFlowTheme.of(context)
+                                      cursorColor: FlutterTheme.of(context)
                                           .primaryText,
                                       validator: _model.textController1Validator
                                           .asValidator(context),
@@ -319,9 +317,8 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                     child: TextFormField(
                                       controller: _model.textController2,
                                       focusNode: _model.textFieldFocusNode2,
-                                      readOnly: true, // Impede a digitação manual
+                                      readOnly: true, 
                                       onTap: () async {
-                                        // Abre o TimePicker
                                         final TimeOfDay? pickedTime = await showTimePicker(
                                           context: context,
                                           initialTime: TimeOfDay.now(),
@@ -329,7 +326,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                             return Theme(
                                               data: ThemeData.light().copyWith(
                                                 colorScheme: ColorScheme.dark(
-                                                  primary: FlutterFlowTheme.of(context).primary, // Cor do seletor
+                                                  primary: FlutterTheme.of(context).primary,
                                                 ),
                                               ),
                                               child: child!,
@@ -338,7 +335,6 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                         );
                                 
                                         if (pickedTime != null) {
-                                          // Formata a hora selecionada (ex: "07:30 AM")
                                           final formattedTime = pickedTime.format(context);
                                           _model.textController2.text = formattedTime;
                                         }
@@ -346,23 +342,23 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                       decoration: InputDecoration(
                                         isDense: true,
                                         labelText: AppLocalizations.of(context)!.fecharJanela,
-                                        labelStyle: FlutterFlowTheme.of(context)
+                                        labelStyle: FlutterTheme.of(context)
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Inter',
-                                              color: const Color.fromARGB(255, 189, 187, 187), // Define a cor branca
+                                              color: const Color.fromARGB(255, 189, 187, 187),
                                               letterSpacing: 0.0,
                                             ),
-                                        floatingLabelStyle: FlutterFlowTheme.of(context)
+                                        floatingLabelStyle: FlutterTheme.of(context)
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Inter',
-                                              color: Colors.white, // Garante que a cor permaneça branca em foco
+                                              color: Colors.white, 
                                               letterSpacing: 0.0,
                                             ),
                                         floatingLabelBehavior: FloatingLabelBehavior.always,
                                         hintText: 'Ex: 8:00AM',
-                                        hintStyle: FlutterFlowTheme.of(context)
+                                        hintStyle: FlutterTheme.of(context)
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Inter',
@@ -378,7 +374,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: FlutterTheme.of(context)
                                                 .secondaryText,
                                             width: 1.5,
                                           ),
@@ -387,7 +383,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: FlutterTheme.of(context)
                                                 .secondaryText,
                                             width: 1.5,
                                           ),
@@ -396,7 +392,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: FlutterTheme.of(context)
                                                 .secondaryText,
                                             width: 1.5,
                                           ),
@@ -404,17 +400,17 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                               BorderRadius.circular(8.0),
                                         ),
                                         filled: true,
-                                        fillColor: FlutterFlowTheme.of(context)
+                                        fillColor: FlutterTheme.of(context)
                                             .secondaryBackground,
                                       ),
-                                      style: FlutterFlowTheme.of(context)
+                                      style: FlutterTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
                                             letterSpacing: 0.0,
                                           ),
                                       keyboardType: TextInputType.datetime,
-                                      cursorColor: FlutterFlowTheme.of(context)
+                                      cursorColor: FlutterTheme.of(context)
                                           .primaryText,
                                       validator: _model.textController2Validator
                                           .asValidator(context),
@@ -426,7 +422,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         9.0, 20.0, 0.0, 30.0),
-                                    child: FlutterFlowDropDown<String>(
+                                    child: DropDown<String>(
                                       controller:
                                           _model.dropDownValueController ??=
                                               FormFieldController<String>(null),
@@ -436,7 +432,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                           () => _model.dropDownValue = val),
                                       width: 200.0,
                                       height: 45.0,
-                                      textStyle: FlutterFlowTheme.of(context)
+                                      textStyle: FlutterTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
@@ -445,11 +441,11 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                       hintText: AppLocalizations.of(context)!.selecionar,
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,
-                                        color: FlutterFlowTheme.of(context)
+                                        color: FlutterTheme.of(context)
                                             .secondaryText,
                                         size: 24.0,
                                       ),
-                                      fillColor: FlutterFlowTheme.of(context)
+                                      fillColor: FlutterTheme.of(context)
                                           .secondaryBackground,
                                       elevation: 2.0,
                                       borderColor: const Color(0xFFFFF7F7),
@@ -470,7 +466,7 @@ class _CronojanWidgetState extends State<CronojanWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         25.0, 0.0, 0.0, 90.0),
                                     child: Text( AppLocalizations.of(context)!.selSensor,
-                                      style: FlutterFlowTheme.of(context)
+                                      style: FlutterTheme.of(context)
                                           .titleMedium
                                           .override(
                                             fontFamily: 'Inter Tight',

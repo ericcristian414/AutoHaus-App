@@ -6,7 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 import '/backend/schema/structs/index.dart';
-import '/flutter_flow/flutter_flow_util.dart';
+import '../util.dart';
 import 'serialization_util.dart';
 import '/homenav/BottomNavWidget.dart';
 import '/index.dart';
@@ -53,7 +53,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
   navigatorKey: appNavigatorKey,
   errorBuilder: (context, state) => HomePageWidget(),
   routes: [
-    FFRoute(
+    FlutterRoute(
       name: HomePageWidget.routeName,
       path: HomePageWidget.routePath,
       builder: (context, _) => BottomNavWidget(currentIndex: 0),
@@ -63,7 +63,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         duration: Duration(milliseconds: 300),
       ),
     ),
-    FFRoute(
+    FlutterRoute(
       name: VelocidadesWidget.routeName,
       path: VelocidadesWidget.routePath,
       builder: (context, _) => BottomNavWidget(currentIndex: 1),
@@ -73,7 +73,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         duration: Duration(milliseconds: 300),
       ),
     ),
-    FFRoute(
+    FlutterRoute(
       name: DesenvolvedorWidget.routeName,
       path: DesenvolvedorWidget.routePath,
       builder: (context, _) => BottomNavWidget(currentIndex: 2),
@@ -83,7 +83,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         duration: Duration(milliseconds: 300),
       ),
     ),
-    FFRoute(
+    FlutterRoute(
       name: DesenvolvedorCopyWidget.routeName,
       path: DesenvolvedorCopyWidget.routePath,
       builder: (context, _) => BottomNavWidget(currentIndex: 3),
@@ -93,32 +93,32 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         duration: Duration(milliseconds: 300),
       ),
     ),
-    FFRoute(
+    FlutterRoute(
       name: ToldoWidget.routeName,
       path: ToldoWidget.routePath,
       builder: (context, params) => ToldoWidget(),
     ),
-    FFRoute(
+    FlutterRoute(
       name: JanelaWidget.routeName,
       path: JanelaWidget.routePath,
       builder: (context, params) => JanelaWidget(),
     ),
-    FFRoute(
+    FlutterRoute(
       name: ConfiguracoesWidget.routeName,
       path: ConfiguracoesWidget.routePath,
       builder: (context, params) => ConfiguracoesWidget(),
     ),
-    FFRoute(
+    FlutterRoute(
       name: CronojanWidget.routeName,
       path: CronojanWidget.routePath,
       builder: (context, params) => CronojanWidget(),
     ),
-    FFRoute(
+    FlutterRoute(
       name: CronotolWidget.routeName,
       path: CronotolWidget.routePath,
       builder: (context, params) => CronotolWidget(),
     ),
-    FFRoute(
+    FlutterRoute(
       name: ObjetosWidget.routeName,
       path: ObjetosWidget.routePath,
       builder: (context, params) => ObjetosWidget(),
@@ -154,8 +154,8 @@ extension _GoRouterStateExtensions on GoRouterState {
           : TransitionInfo.appDefault();
 }
 
-class FFParameters {
-  FFParameters(this.state, [this.asyncParams = const {}]);
+class FlutterParameters {
+  FlutterParameters(this.state, [this.asyncParams = const {}]);
 
   final GoRouterState state;
   final Map<String, Future<dynamic> Function(String)> asyncParams;
@@ -216,8 +216,8 @@ class FFParameters {
   }
 }
 
-class FFRoute {
-  const FFRoute({
+class FlutterRoute {
+  const FlutterRoute({
     required this.name,
     required this.path,
     required this.builder,
@@ -231,7 +231,7 @@ class FFRoute {
   final String path;
   final bool requireAuth;
   final Map<String, Future<dynamic> Function(String)> asyncParams;
-  final Widget Function(BuildContext, FFParameters) builder;
+  final Widget Function(BuildContext, FlutterParameters) builder;
   final List<GoRoute> routes;
   final TransitionInfo? transitionInfo;
 
@@ -245,7 +245,7 @@ class FFRoute {
           return effectiveTransitionInfo.hasTransition
               ? CustomTransitionPage(
                   key: state.pageKey,
-                  child: builder(context, FFParameters(state)),
+                  child: builder(context, FlutterParameters(state)),
                   transitionDuration: effectiveTransitionInfo.duration,
                   transitionsBuilder:
                       (context, animation, secondaryAnimation, child) =>
@@ -264,7 +264,7 @@ class FFRoute {
                 )
               : MaterialPage(
                   key: state.pageKey,
-                  child: builder(context, FFParameters(state)),
+                  child: builder(context, FlutterParameters(state)),
                 );
         },
         routes: routes,

@@ -1,10 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_util.dart';
+import '../flutter/util.dart';
 import 'velocidades_widget.dart' show VelocidadesWidget;
 import 'package:flutter/material.dart';
 
 
-class VelocidadesModel extends FlutterFlowModel<VelocidadesWidget> {
+class VelocidadesModel extends FlutterModel<VelocidadesWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextFieldAT widget.

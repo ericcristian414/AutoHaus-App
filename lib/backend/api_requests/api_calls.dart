@@ -1,4 +1,4 @@
-import '/flutter_flow/flutter_flow_util.dart';
+import '../../flutter/util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
