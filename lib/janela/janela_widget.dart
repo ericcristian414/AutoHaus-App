@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -7,9 +6,9 @@ import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:provider/provider.dart';
 
-import '../flutter/theme.dart';
-import '../flutter/util.dart';
-import '../flutter/widgets.dart';
+import 'package:auto_haus/flutter/theme.dart';
+import '/flutter/util.dart';
+import '/flutter/widgets.dart';
 import 'package:auto_haus/l10n/app_localizations.dart';
 
 import 'janela_model.dart';
@@ -37,17 +36,16 @@ class _JanelaWidgetState extends State<JanelaWidget> {
   StreamSubscription? _updatesSubscription;
 
   double _posicaoJanela = 0.0;
-  double _posicaoJanelaReal = 0.0;
   String _statusChuva = 'SECO';
   bool _automacaoChuva = false;
 
   final String _topicBase = "casa/erick/toldo_janela";
   late final String _topicJanelaCmd;
   late final String _topicJanelaRealCmd;
+  late final String _topicJanelaRealEstado;
   late final String _topicJanelaEstado;
   late final String _topicSensorEstado;
   late final String _topicSensorConfig;
-  late final String _topicJanelaRealEstado;
 
   @override
   void initState() {
@@ -56,15 +54,13 @@ class _JanelaWidgetState extends State<JanelaWidget> {
 
     _topicJanelaCmd = '$_topicBase/janela/cmd';
     _topicJanelaRealCmd = '$_topicBase/janelaReal/cmd';
-    _topicJanelaEstado = '$_topicBase/janela/estado';
     _topicJanelaRealEstado = '$_topicBase/janelaReal/estado';
+    _topicJanelaEstado = '$_topicBase/janela/estado';
     _topicSensorEstado = '$_topicBase/sensor/estado';
     _topicSensorConfig = '$_topicBase/sensor/config';
 
     _model.switchValue1 = FlutterAppState().sliderjanela;
     _model.switchValue2 = FlutterAppState().sliderChuvaJanela;
-    _model.switchValue3 = FlutterAppState().sliderjanelaReal;
-    _model.switchValue4 = FlutterAppState().sliderChuvaJanelaReal;
 
     _pageController = PageController(initialPage: _pageIndex);
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -119,7 +115,6 @@ class _JanelaWidgetState extends State<JanelaWidget> {
     if (!mounted) return;
 
     _client!.subscribe(_topicJanelaEstado, MqttQos.atLeastOnce);
-    _client!.subscribe(_topicJanelaRealEstado, MqttQos.atLeastOnce);
     _client!.subscribe(_topicSensorEstado, MqttQos.atLeastOnce);
 
     _updatesSubscription = _client!.updates!.listen((List<MqttReceivedMessage<MqttMessage>> c) {
@@ -144,10 +139,6 @@ class _JanelaWidgetState extends State<JanelaWidget> {
             if (jsonPayload.containsKey('autoMovJanela')) {
               _automacaoChuva = jsonPayload['autoMovJanela'] as bool;
               _model.switchValue2 = _automacaoChuva;
-            }
-            if (topic == _topicJanelaRealEstado && jsonPayload.containsKey('posicao')) {
-            _posicaoJanelaReal = (jsonPayload['posicao'] as num).toDouble();
-            _model.slider2Value = _posicaoJanelaReal;
             }
           }
         });
@@ -533,7 +524,7 @@ class _JanelaWidgetState extends State<JanelaWidget> {
                                                     padding: EdgeInsetsDirectional.fromSTEB(200.0, 13.0, 20.0, 0.0),
                                                     child: Switch(
                                                       value: _model.switchValue1!,
-                                                      onChanged: (newValue) => setState(() => _model.switchValue2 = newValue),
+                                                      onChanged: (newValue) => setState(() => _model.switchValue1 = newValue),
                                                       activeColor: FlutterTheme.of(context).primaryText,
                                                       activeTrackColor: FlutterTheme.of(context).primary,
                                                       inactiveTrackColor: Color(0xFF98999A),
@@ -548,13 +539,13 @@ class _JanelaWidgetState extends State<JanelaWidget> {
                                                     inactiveColor: Colors.white,
                                                     min: 0.0,
                                                     max: 100.0,
-                                                    value: _model.slider2Value ?? _posicaoJanela,
+                                                    value: _model.slider1Value ?? _posicaoJanela,
                                                     divisions: 10,
-                                                    onChanged: !_model.switchValue2!
+                                                    onChanged: !_model.switchValue1!
                                                         ? null
-                                                        : (newValue) => setState(() => _model.slider2Value = newValue),
+                                                        : (newValue) => setState(() => _model.slider1Value = newValue),
                                                     onChangeEnd: (newValue) {
-                                                      if (!_model.switchValue2!) return;
+                                                      if (!_model.switchValue1!) return;
                                                       final pos = newValue.round();
                                                       _publishCommand(_topicJanelaRealCmd, 'POS:$pos');
                                                     },
@@ -610,8 +601,8 @@ class _JanelaWidgetState extends State<JanelaWidget> {
                                                         style: FlutterTheme.of(context).bodyMedium.override(
                                                               fontFamily: 'Inter',
                                                               color: _statusChuva == 'SECO'
-                                                                  ? Color(0xE639D258)
-                                                                  : Color(0xE6E12428),
+                                                                  ? Color(0xE639D258) 
+                                                                  : Color(0xE6E12428), 
                                                               fontSize: 17.0,
                                                               fontWeight: FontWeight.w600,
                                                             ),
@@ -666,7 +657,7 @@ class _JanelaWidgetState extends State<JanelaWidget> {
                                       value: _model.switchValue2!,
                                       onChanged: (newValue) {
                                         setState(() => _model.switchValue2 = newValue);
-                                        _publishJsonCommand(_topicSensorConfig, {"movJanelaAuto": newValue});
+                                        _publishJsonCommand(_topicJanelaRealEstado, {"movJanelaAuto": newValue});
                                       },
                                       activeColor: FlutterTheme.of(context).info,
                                       activeTrackColor: FlutterTheme.of(context).primary,
