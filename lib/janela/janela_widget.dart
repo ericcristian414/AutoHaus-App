@@ -36,8 +36,10 @@ class _JanelaWidgetState extends State<JanelaWidget> {
   StreamSubscription? _updatesSubscription;
 
   double _posicaoJanela = 0.0;
+  double _posicaoJanelaReal = 0.0;
   String _statusChuva = 'SECO';
   bool _automacaoChuva = false;
+  bool _automacaoChuvaReal = false;
 
   final String _topicBase = "casa/erick/toldo_janela";
   late final String _topicJanelaCmd;
@@ -46,6 +48,7 @@ class _JanelaWidgetState extends State<JanelaWidget> {
   late final String _topicJanelaEstado;
   late final String _topicSensorEstado;
   late final String _topicSensorConfig;
+  late final String _topicJanelaRealConfig;
 
   @override
   void initState() {
@@ -55,12 +58,17 @@ class _JanelaWidgetState extends State<JanelaWidget> {
     _topicJanelaCmd = '$_topicBase/janela/cmd';
     _topicJanelaRealCmd = '$_topicBase/janelaReal/cmd';
     _topicJanelaRealEstado = '$_topicBase/janelaReal/estado';
+    _topicJanelaRealConfig = '$_topicBase/janelaReal/sensor/config';
     _topicJanelaEstado = '$_topicBase/janela/estado';
     _topicSensorEstado = '$_topicBase/sensor/estado';
     _topicSensorConfig = '$_topicBase/sensor/config';
 
     _model.switchValue1 = FlutterAppState().sliderjanela;
     _model.switchValue2 = FlutterAppState().sliderChuvaJanela;
+    _model.switchValue3 = false; 
+    _model.switchValue4 = false; 
+    _model.slider1Value = 0.0;   
+    _model.slider2Value = 0.0;
 
     _pageController = PageController(initialPage: _pageIndex);
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -115,33 +123,44 @@ class _JanelaWidgetState extends State<JanelaWidget> {
     if (!mounted) return;
 
     _client!.subscribe(_topicJanelaEstado, MqttQos.atLeastOnce);
+    _client!.subscribe(_topicJanelaRealEstado, MqttQos.atLeastOnce);
     _client!.subscribe(_topicSensorEstado, MqttQos.atLeastOnce);
 
-    _updatesSubscription = _client!.updates!.listen((List<MqttReceivedMessage<MqttMessage>> c) {
-      final MqttPublishMessage recMess = c[0].payload as MqttPublishMessage;
-      final String payload = MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-      final String topic = c[0].topic;
 
-      _log('Mensagem recebida no tópico [$topic]: "$payload"');
+    // CORRIGIR: Remover o setState duplicado e organizar a lógica
+_updatesSubscription = _client!.updates!.listen((List<MqttReceivedMessage<MqttMessage>> c) {
+  final MqttPublishMessage recMess = c[0].payload as MqttPublishMessage;
+  final String payload = MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
+  final String topic = c[0].topic;
 
-      try {
-        final Map<String, dynamic> jsonPayload = json.decode(payload);
-        if (!mounted) return;
+  _log('Mensagem recebida no tópico [$topic]: "$payload"');
 
-        setState(() {
-          if (topic == _topicJanelaEstado && jsonPayload.containsKey('posicao')) {
-            _posicaoJanela = (jsonPayload['posicao'] as num).toDouble();
-            _model.slider1Value = _posicaoJanela;
-          } else if (topic == _topicSensorEstado) {
-            if (jsonPayload.containsKey('chuva')) {
-              _statusChuva = jsonPayload['chuva'] as String;
-            }
-            if (jsonPayload.containsKey('autoMovJanela')) {
-              _automacaoChuva = jsonPayload['autoMovJanela'] as bool;
-              _model.switchValue2 = _automacaoChuva;
-            }
-          }
-        });
+  try {
+    final Map<String, dynamic> jsonPayload = json.decode(payload);
+    if (!mounted) return;
+
+    setState(() {
+      if (topic == _topicJanelaEstado && jsonPayload.containsKey('posicao')) {
+        _posicaoJanela = (jsonPayload['posicao'] as num).toDouble();
+        _model.slider1Value = _posicaoJanela;
+      } else if (topic == _topicJanelaRealEstado && jsonPayload.containsKey('posicao')) {
+        _posicaoJanelaReal = (jsonPayload['posicao'] as num).toDouble();
+        _model.slider2Value = _posicaoJanelaReal;
+      } else if (topic == _topicSensorEstado) {
+        if (jsonPayload.containsKey('chuva')) {
+          _statusChuva = jsonPayload['chuva'] as String;
+        }
+        if (jsonPayload.containsKey('autoMovJanela')) {
+          _automacaoChuva = jsonPayload['autoMovJanela'] as bool;
+          _model.switchValue2 = _automacaoChuva;
+        }
+        if (jsonPayload.containsKey('movJanelaRealAuto')) {
+          _automacaoChuvaReal = jsonPayload['movJanelaRealAuto'] as bool;
+          _model.switchValue4 = _automacaoChuvaReal;
+        }
+      }
+    });
+
       } catch (e) {
         _log("Erro ao processar mensagem do tópico [$topic]: $e");
       }
@@ -509,7 +528,7 @@ class _JanelaWidgetState extends State<JanelaWidget> {
                                                   child: Padding(
                                                     padding: EdgeInsetsDirectional.fromSTEB(154.0, 25.0, 0.0, 0.0),
                                                     child: Text(
-                                                      '${_posicaoJanela.round()}%',
+                                                      '${_posicaoJanelaReal.round()}%',
                                                       style: FlutterTheme.of(context).titleMedium.override(
                                                             fontFamily: 'Inter Tight',
                                                             fontSize: 17,
@@ -523,8 +542,8 @@ class _JanelaWidgetState extends State<JanelaWidget> {
                                                   child: Padding(
                                                     padding: EdgeInsetsDirectional.fromSTEB(200.0, 13.0, 20.0, 0.0),
                                                     child: Switch(
-                                                      value: _model.switchValue1!,
-                                                      onChanged: (newValue) => setState(() => _model.switchValue1 = newValue),
+                                                      value: _model.switchValue3!,
+                                                      onChanged: (newValue) => setState(() => _model.switchValue3 = newValue),
                                                       activeColor: FlutterTheme.of(context).primaryText,
                                                       activeTrackColor: FlutterTheme.of(context).primary,
                                                       inactiveTrackColor: Color(0xFF98999A),
@@ -539,13 +558,13 @@ class _JanelaWidgetState extends State<JanelaWidget> {
                                                     inactiveColor: Colors.white,
                                                     min: 0.0,
                                                     max: 100.0,
-                                                    value: _model.slider1Value ?? _posicaoJanela,
+                                                    value: _model.slider2Value ?? _posicaoJanela,
                                                     divisions: 10,
-                                                    onChanged: !_model.switchValue1!
+                                                    onChanged: !_model.switchValue3!
                                                         ? null
-                                                        : (newValue) => setState(() => _model.slider1Value = newValue),
+                                                        : (newValue) => setState(() => _model.slider2Value = newValue),
                                                     onChangeEnd: (newValue) {
-                                                      if (!_model.switchValue1!) return;
+                                                      if (!_model.switchValue3!) return;
                                                       final pos = newValue.round();
                                                       _publishCommand(_topicJanelaRealCmd, 'POS:$pos');
                                                     },
@@ -654,10 +673,10 @@ class _JanelaWidgetState extends State<JanelaWidget> {
                                       ],
                                     ),
                                     Switch(
-                                      value: _model.switchValue2!,
+                                      value: _model.switchValue4!,
                                       onChanged: (newValue) {
-                                        setState(() => _model.switchValue2 = newValue);
-                                        _publishJsonCommand(_topicJanelaRealEstado, {"movJanelaAuto": newValue});
+                                        setState(() => _model.switchValue4 = newValue);
+                                        _publishJsonCommand(_topicJanelaRealConfig, {"movJanelaRealAuto": newValue});
                                       },
                                       activeColor: FlutterTheme.of(context).info,
                                       activeTrackColor: FlutterTheme.of(context).primary,

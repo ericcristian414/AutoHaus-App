@@ -19,6 +19,8 @@ class JanelaModel extends FlutterModel<JanelaWidget> {
   // State field(s) for Switch widget.
   bool? switchValue1;
 
+  bool? switchValeu2;
+
   bool? switchValue3;
 
   bool? switchValue4;
