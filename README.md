@@ -86,9 +86,3 @@ The firmware exposes simple HTTP GET endpoints for control. Examples (adjust to 
 ## Download
 
 * The AutoHaus App is available on https://auto-haus-site.vercel.app/desktop/aplicativo.html
-
-
-
----
-
-*This README is a base template — you can modify hardware pinouts, endpoints, or descriptions to match the exact code in your repository.*
